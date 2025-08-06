@@ -2,12 +2,17 @@
 
 import { useState } from "react";
 
-export default function NavBar() {
+export default function NavBar({ selected, onSelect }) {
     const [collapsed, setCollapsed] = useState(true);
+    const items = [
+        { name: "Богино хугацааны чөлөө", href: "/", svg: ["M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z"] },
+        { name: "Урт хугацааны чөлөө", href: "/about", svg: ["M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5", "M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z"] },
+        { name: "Томилолт", href: "/contact", svg: ["M8 0c-.787 0-1.292.592-1.572 1.151A4.35 4.35 0 0 0 6 3v3.691l-2 1V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.191l-1.17.585A1.5 1.5 0 0 0 0 10.618V12a.5.5 0 0 0 .582.493l1.631-.272.313.937a.5.5 0 0 0 .948 0l.405-1.214 2.21-.369.375 2.253-1.318 1.318A.5.5 0 0 0 5.5 16h5a.5.5 0 0 0 .354-.854l-1.318-1.318.375-2.253 2.21.369.405 1.214a.5.5 0 0 0 .948 0l.313-.937 1.63.272A.5.5 0 0 0 16 12v-1.382a1.5 1.5 0 0 0-.83-1.342L14 8.691V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v.191l-2-1V3c0-.568-.14-1.271-.428-1.849C9.292.591 8.787 0 8 0"] },
+    ];
 
     return (
         <nav
-            className={`flex flex-col p-4 bg-gray-800 text-white h-screen transition-all duration-300
+            className={`flex flex-col p-4 bg-gray-600 text-white h-screen transition-all duration-300
         ${collapsed ? "w-20" : "w-64"}
       `}
         >
@@ -35,7 +40,7 @@ export default function NavBar() {
                     </div>
                 )}
                 <button
-                    className="flex items-center justify-center rounded-lg bg-gray-700 p-2 cursor-pointer hover:bg-gray-600 transition-colors self-center w-full"
+                    className="flex items-center justify-center rounded-xl bg-gray-700 p-2 cursor-pointer hover:bg-gray-500 transition-colors self-center w-full"
                     onClick={() => setCollapsed(!collapsed)}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1A8AF5" viewBox="0 0 16 16">
@@ -46,34 +51,33 @@ export default function NavBar() {
 
             <div className="flex flex-col justify-between flex-1">
                 <ul className="flex flex-col gap-4">
-                    <li className={`rounded-lg bg-gray-700 p-2 flex ${collapsed ? "justify-center" : ""}`}>
-                        <a href="/" className="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1A8AF5" viewBox="0 0 16 16">
-                                <path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z" />
-                            </svg>
-                            {!collapsed && <span>Богино хугацааны чөлөө</span>}
-                        </a>
-                    </li>
-                    <li className={`rounded-lg bg-gray-700 p-2 flex ${collapsed ? "justify-center" : ""}`}>
-                        <a href="/about" className="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1A8AF5" viewBox="0 0 16 16">
-                                <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5" />
-                                <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
-                            </svg>
-                            {!collapsed && <span>Урт хугацааны чөлөө</span>}
-                        </a>
-                    </li>
-                    <li className={`rounded-lg bg-gray-700 p-2 flex ${collapsed ? "justify-center" : ""}`}>
-                        <a href="/contact" className="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1A8AF5" viewBox="0 0 16 16">
-                                <path d="M8 0c-.787 0-1.292.592-1.572 1.151A4.35 4.35 0 0 0 6 3v3.691l-2 1V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.191l-1.17.585A1.5 1.5 0 0 0 0 10.618V12a.5.5 0 0 0 .582.493l1.631-.272.313.937a.5.5 0 0 0 .948 0l.405-1.214 2.21-.369.375 2.253-1.318 1.318A.5.5 0 0 0 5.5 16h5a.5.5 0 0 0 .354-.854l-1.318-1.318.375-2.253 2.21.369.405 1.214a.5.5 0 0 0 .948 0l.313-.937 1.63.272A.5.5 0 0 0 16 12v-1.382a1.5 1.5 0 0 0-.83-1.342L14 8.691V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v.191l-2-1V3c0-.568-.14-1.271-.428-1.849C9.292.591 8.787 0 8 0" />
-                            </svg>
-                            {!collapsed && <span>Томилолт</span>}
-                        </a>
-                    </li>
+                    {items.map((item) => {
+                        const active = selected === item.name;
+                        return (
+                            <li
+                                key={item.name}
+                                className={`rounded-xl p-2 flex cursor-pointer transition-colors ${collapsed ? "justify-center" : ""
+                                    } ${active ? "bg-white text-gray-900" : "bg-gray-700 text-white hover:bg-gray-500"}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    onSelect(item.name);
+                                }}
+                            >
+                                <a href={item.href} className="flex items-center gap-3">
+                                    {/* example icon — keep your existing SVGs */}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1A8AF5" viewBox="0 0 16 16">
+                                        {item.svg.map((path, i) => {
+                                            return <path key={i} d={path} />;
+                                        })}
+                                    </svg>
+                                    {!collapsed && <span>{item.name}</span>}
+                                </a>
+                            </li>
+                        );
+                    })}
                 </ul>
 
-                <div className="flex items-center justify-center rounded-lg bg-gray-700 p-2 mt-4">
+                <div className={`rounded-xl bg-gray-700 p-2 flex mt-4 ${collapsed ? "justify-center" : ""}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1A8AF5" viewBox="0 0 16 16">
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                     </svg>
